@@ -1,202 +1,386 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kazal Mahi | Under Maintenance</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <title>Kazal Mahi | Full-Stack Web Developer & Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Poppins:wght@300;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap');
 
         :root {
-            --primary: #00d2ff;
-            --bg: #111827;
-            --card-bg: #1f2937;
+            --primary: #6366f1;
+            --accent: #06b6d4;
+            --bg-deep: #020617;
+            --bg-card: rgba(30, 41, 59, 0.5);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-deep); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
 
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            z-index: -1; pointer-events: none;
         }
 
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 15px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            z-index: 100;
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .lang-switch:hover {
-            background: var(--primary);
-            color: var(--bg);
-        }
+        .logo { font-family: 'Poppins', sans-serif; font-size: 1.3rem; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
 
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 650px;
-            animation: fadeIn 1s ease-in;
+        .lang-toggle { display: flex; gap: 3px; background: var(--glass); padding: 4px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .lang-toggle button {
+            background: none; border: none; color: var(--text-dim);
+            padding: 5px 12px; border-radius: 25px; cursor: pointer;
+            font-weight: 600; font-size: 0.75rem; transition: 0.3s;
         }
+        .lang-toggle button.active { background: var(--primary); color: white; }
 
-        .profile-wrapper {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 1.5rem;
-        }
-
-        .profile-frame {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary), #3a7bd5);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: morph 8s ease-in-out infinite alternate;
+        /* --- Hero Section --- */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 8% 50px; }
+        
+        .photo-frame {
+            width: 150px; height: 150px;
+            border-radius: 50%;
             padding: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            margin-bottom: 25px;
+            transition: 0.3s;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
         }
+        .photo-frame:hover { transform: scale(1.05) rotate(3deg); box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); }
+        .photo-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg-deep); }
 
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: inherit;
-            border: 4px solid var(--bg);
+        .hero span.badge {
+            background: rgba(99, 102, 241, 0.1); color: var(--primary);
+            padding: 6px 14px; border-radius: 50px; font-weight: 600; font-size: 0.8rem;
+            margin-bottom: 15px; border: 1px solid rgba(99, 102, 241, 0.2);
         }
+        .hero h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
+        .gradient-text { background: linear-gradient(to right, #818cf8, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-dim); max-width: 650px; font-size: 1.05rem; margin-bottom: 30px; line-height: 1.7; }
 
-        @keyframes morph {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; font-size: 0.9rem; text-align: center; }
+        .btn-main { background: var(--primary); color: white; border: 1px solid var(--primary); min-width: 160px; }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); min-width: 160px; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1); }
+
+        /* --- Responsive Grid Adjustments --- */
+        section { padding: 80px 8%; }
+        h2.sec-title { font-size: 2.2rem; margin-bottom: 50px; font-weight: 800; position: relative; }
+        h2.sec-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 50px; height: 4px; background: var(--primary); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--bg-card); padding: 35px; border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+            display: flex; flex-direction: column; text-align: left;
         }
+        .card:hover { border-color: var(--primary); transform: translateY(-8px); background: rgba(99, 102, 241, 0.05); }
+        .card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--text-main); }
+        .card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; flex-grow: 1; }
+        .card-link { color: var(--accent); text-decoration: none; font-weight: 600; margin-top: 20px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
 
-        h1 { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary); }
-        .status { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #9ca3af; }
-        .bio { font-size: 1.1rem; line-height: 1.6; color: #d1d5db; margin-bottom: 30px; min-height: 60px; }
+        .timeline { position: relative; max-width: 800px; }
+        .time-box {
+            padding: 25px 30px; border-left: 2px solid var(--primary);
+            margin-bottom: 30px; background: var(--glass); border-radius: 0 16px 16px 0;
+            position: relative;
+        }
+        .time-box::before {
+            content: ''; position: absolute; left: -9px; top: 28px;
+            width: 16px; height: 16px; background: var(--primary); border-radius: 50%;
+            box-shadow: 0 0 12px var(--primary);
+        }
+        .time-box span.year { color: var(--primary); font-weight: 800; font-size: 0.9rem; }
+        .time-box h4 { font-size: 1.2rem; margin: 8px 0; color: var(--accent); }
 
-        .social-links { display: flex; justify-content: center; gap: 15px; }
-        .social-links a {
-            width: 45px; height: 45px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            font-size: 1.2rem;
+        .skills-container { display: flex; flex-wrap: wrap; gap: 12px; }
+        .skill-tag { 
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); 
+            padding: 8px 18px; border-radius: 50px; font-size: 0.9rem; color: var(--text-dim);
+            transition: 0.3s;
+        }
+        .skill-tag:hover { border-color: var(--primary); color: white; background: rgba(99, 102, 241, 0.1); }
+
+        /* --- FAQ Section --- */
+        .faq-container { display: grid; gap: 15px; }
+        .faq-item { background: var(--glass); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .faq-item h4 { color: var(--accent); margin-bottom: 8px; }
+        .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
+
+        footer { background-color: #010411; padding: 80px 8% 30px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-about { grid-column: span 2; }
+        .footer-about p { font-size: 0.95rem; line-height: 1.6; margin: 20px 0; max-width: 400px; }
+        .footer-links h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links ul li a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-links ul li a:hover { color: var(--primary); padding-left: 5px; }
+        
+        .contact-info p { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 0.9rem; }
+        .contact-info i { color: var(--primary); font-size: 1rem; width: 20px; }
+
+        .socials { display: flex; gap: 12px; margin-top: 20px; }
+        .socials a {
+            color: var(--text-dim); font-size: 1.1rem; width: 40px; height: 40px;
+            border-radius: 50%; background: var(--glass); display: flex;
+            align-items: center; justify-content: center; transition: 0.3s;
             border: 1px solid rgba(255,255,255,0.05);
         }
+        .socials a:hover { background: var(--primary); color: white; transform: translateY(-3px); }
 
-        .social-links a:hover {
-            transform: translateY(-5px);
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.8rem; opacity: 0.5; }
+
+        /* --- MEDIA QUERIES (রেসপন্সিভনেস নিশ্চিত করার জন্য) --- */
+        @media (min-width: 1024px) {
+            .hero, section, footer { padding-left: 12%; padding-right: 12%; }
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) {
+            section { padding: 60px 6%; }
+            .hero { padding-top: 100px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .photo-frame { width: 130px; height: 130px; }
+            .btn { width: 100%; min-width: unset; }
+            .btn-group { flex-direction: column; width: 100%; max-width: 300px; }
+            .footer-about { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            h2.sec-title { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            nav { padding: 15px 4%; }
+            .logo { font-size: 1.1rem; }
+            .card { padding: 25px; }
+            .time-box { padding: 20px 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="lang-switch" onclick="toggleLang()">English</button>
+    <div class="bg-glow"></div>
 
-    <div class="container">
-        <div class="profile-wrapper">
-            <div class="profile-frame">
-                <img src="https://i.postimg.cc/g2x5xKJd/Kazal-Mahi.webp" alt="Kazal Mahi" class="profile-img">
+    <nav>
+        <div class="logo">KAZAL<span>MAHI</span></div>
+        <div class="lang-toggle">
+            <button id="btn-en" class="active">EN</button>
+            <button id="btn-bn">BN</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="photo-frame">
+            <img src="https://i.postimg.cc/g2x5xKJd/Kazal_Mahi.webp" alt="Kazal Mahi">
+        </div>
+        <span class="badge" data-en="Available for Hire" data-bn="কাজের জন্য উপলব্ধ">Available for Hire</span>
+        <h1 data-en="Engineering <span class='gradient-text'>Digital Experiences</span> with Precision." 
+            data-bn="নির্ভুলতার সাথে <span class='gradient-text'>ডিজিটাল অভিজ্ঞতা</span> তৈরি করছি।">
+            Engineering <span class='gradient-text'>Digital Experiences</span> with Precision.
+        </h1>
+        <p data-en="I'm Kazal Mahi, a Web Developer & Graphic Designer from Dhaka. I specialize in building robust WordPress ecosystems and custom front-end solutions."
+           data-bn="আমি কাজল মাহি, ঢাকা ভিত্তিক একজন ওয়েব ডেভেলপার এবং গ্রাফিক ডিজাইনার। আমি শক্তিশালী ওয়ার্ডপ্রেস ইকোসিস্টেম এবং কাস্টম ফ্রন্ট-এন্ড সলিউশন তৈরিতে বিশেষজ্ঞ।">
+            I'm Kazal Mahi, a Web Developer & Graphic Designer from Dhaka. I specialize in building robust WordPress ecosystems and custom front-end solutions.
+        </p>
+        <div class="btn-group">
+            <a href="#contact" class="btn btn-main" data-en="Start a Project" data-bn="প্রজেক্ট শুরু করুন">Start a Project</a>
+            <a href="#experience" class="btn btn-outline" data-en="My Journey" data-bn="আমার যাত্রা">My Journey</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="sec-title" data-en="My Expertise" data-bn="আমার দক্ষতা">My Expertise</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fab fa-wordpress"></i>
+                <h3 data-en="WordPress Development" data-bn="ওয়ার্ডপ্রেস ডেভেলপমেন্ট">WordPress Development</h3>
+                <p data-en="Custom theme development, customization, and high-performance WooCommerce stores." data-bn="কাস্টম থিম ডেভেলপমেন্ট, কাস্টমাইজেশন এবং হাই-পারফরম্যান্স উ-কমার্স স্টোর তৈরি।">From custom theme development to high-performance WooCommerce stores.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <h3 data-en="Web Design & UI" data-bn="ওয়েব ডিজাইন ও ইউআই">Web Design & UI</h3>
+                <p data-en="Responsive interfaces using HTML5, CSS3, and JavaScript with modern design trends." data-bn="এইচটিএমএল, সিএসএস এবং জাভাস্ক্রিপ্ট ব্যবহার করে আধুনিক ট্রেন্ড অনুযায়ী রেসপন্সিভ ডিজাইন।">Crafting interactive interfaces using modern HTML5, CSS3, and JS.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-paint-brush"></i>
+                <h3 data-en="Graphic Design" data-bn="গ্রাফিক ডিজাইন">Graphic Design</h3>
+                <p data-en="Designing logos, social media banners, and impactful branding identities." data-bn="লোগো, সোশ্যাল মিডিয়া ব্যানার এবং ব্র্যান্ডিং আইডেন্টিটি ডিজাইন।">Designing impactful logos and materials that define your unique presence.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shopping-bag"></i>
+                <h3 data-en="F-Commerce Support" data-bn="এফ-কমার্স সাপোর্ট">F-Commerce Support</h3>
+                <p data-en="Payment gateway setup and retail account management for online businesses." data-bn="অনলাইন ব্যবসার জন্য পেমেন্ট গেটওয়ে এবং রিটেইল অ্যাকাউন্ট ম্যানেজমেন্ট।">Online business solutions and account operations.</p>
             </div>
         </div>
+    </section>
 
-        <div id="content-bn">
-            <p class="status">পোর্টফোলিও মেইনটেন্যান্স চলছে</p>
-            <h1>কাজল মাহি</h1>
-            <p class="bio">আমি একজন ফুল টাইম ওয়েব ডেভেলপার ও পার্ট্টাইম গ্রাফিক ডিজাইনার। নিজের পোর্টফোলিও বানানোর কাজ চলছে… কিন্তু ক্লায়েন্টের প্রজেক্ট শেষ করতে করতে নিজেরটাই pending 😅 খুব শীঘ্রই কিছু নতুন নিয়ে হাজির হচ্ছি!</p>
+    <section id="experience">
+        <h2 class="sec-title" data-en="Professional Journey" data-bn="পেশাদার যাত্রা">Professional Journey</h2>
+        <div class="timeline">
+            <div class="time-box">
+                <span class="year">2025 — Present</span>
+                <h4 data-en="Client Management Executive @ Cre8Web" data-bn="ক্লায়েন্ট ম্যানেজমেন্ট এক্সিকিউটিভ @ Cre8Web">Client Management Executive @ Cre8Web</h4>
+                <p data-en="Bridging the gap between client vision and technical execution." data-bn="ক্লায়েন্টের পরিকল্পনা এবং টেকনিক্যাল টিমের কাজের মধ্যে সমন্বয়।">Bridging the gap between client vision and technical execution.</p>
+            </div>
+            <div class="time-box">
+                <span class="year">2022 — 2025</span>
+                <h4 data-en="Freelance WordPress Developer @ Fiverr" data-bn="ফ্রিল্যান্স ওয়ার্ডপ্রেস ডেভেলপার @ ফাইভার">Freelance WordPress Developer @ Fiverr</h4>
+                <p data-en="Delivered 100+ global projects with a focus on clean design." data-bn="ক্লিন ডিজাইনের ওপর ফোকাস করে ১০০+ বৈশ্বিক প্রোজেক্ট সম্পন্ন করেছি।">Delivered 100+ global projects with a focus on clean design.</p>
+            </div>
+            <div class="time-box">
+                <span class="year">2022 — 2024</span>
+                <h4 data-en="F-Commerce Executive @ bKash" data-bn="এফ-কমার্স এক্সিকিউটিভ @ বিকাশ">F-Commerce Executive @ bKash</h4>
+                <p data-en="Empowered small entrepreneurs with digital payment onboarding." data-bn="ক্ষুদ্র উদ্যোক্তাদের ডিজিটাল পেমেন্ট সেটআপে সরাসরি সহায়তা করেছি।">Empowered small entrepreneurs with digital payment onboarding.</p>
+            </div>
+            <div class="time-box">
+                <span class="year">2020 — 2024</span>
+                <h4 data-en="Graphic & Web Executive @ GAMESHOP" data-bn="গ্রাফিক ও ওয়েব এক্সিকিউটিভ @ গেমশপ">Graphic & Web Executive @ GAMESHOP</h4>
+                <p data-en="Led design and web operations for gameshopstore.net." data-bn="গেমশপ স্টোরের ডিজাইন এবং ওয়েব অপারেশন পরিচালনা।">Led design and web operations for gameshopstore.net.</p>
+            </div>
         </div>
+    </section>
 
-        <div id="content-en" style="display: none;">
-            <p class="status">Under Maintenance</p>
-            <h1>Kazal Mahi</h1>
-            <p class="bio">I am a Professional Graphic Designer & Web Developer. My personal portfolio is currently under construction. Stay tuned for something amazing!</p>
+    <section id="education">
+        <div class="grid">
+            <div class="edu-side">
+                <h2 class="sec-title" data-en="Education" data-bn="শিক্ষা">Education</h2>
+                <div class="time-box">
+                    <span class="year">Pursuing</span>
+                    <h4 data-en="B.Sc. in CSE" data-bn="বি.এস.সি ইন সিএসই">B.Sc. in CSE</h4>
+                    <p>Daffodil International University</p>
+                </div>
+                <div class="time-box">
+                    <span class="year">2017</span>
+                    <h4 data-en="Higher Secondary Certificate" data-bn="উচ্চ মাধ্যমিক সার্টিফিকেট">Higher Secondary Certificate</h4>
+                    <p>Rajshahi Govt. City College</p>
+                </div>
+            </div>
+            <div class="skill-side">
+                <h2 class="sec-title" data-en="Technical Stack" data-bn="টেকনিক্যাল স্কিল">Technical Stack</h2>
+                <div class="skills-container">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">WordPress</span>
+                    <span class="skill-tag">WooCommerce</span>
+                    <span class="skill-tag">Adobe Photoshop</span>
+                    <span class="skill-tag">Adobe Illustrator</span>
+                    <span class="skill-tag">Canva</span>
+                    <span class="skill-tag">MS Office</span>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="social-links">
-            <a href="https://facebook.com/kazalmahi.i" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/+8801521119524" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://linkedin.com/in/kazalmahi" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:kazalmahi.cse@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    <section id="projects">
+        <h2 class="sec-title" data-en="Featured Projects" data-bn="সেরা প্রজেক্ট সমূহ">Featured Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>DigiKhata</h3>
+                <p data-en="A custom PHP-based smart digital accounting solution for businesses." data-bn="আপনার ব্যবসার জন্য একটি কাস্টম পিএইচপি ভিত্তিক ডিজিটাল ও স্মার্ট সমাধান।">Smart digital accounting solution.</p>
+                <a href="https://DigiKhata.pro.bd" target="_blank" class="card-link">Live Link <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="card">
+                <h3>MH Learning Academy</h3>
+                <p data-en="An educational platform built for learning and content management." data-bn="শিক্ষা বিষয়ক প্ল্যাটফর্ম।">An educational platform built for learning and content management.</p>
+                <a href="https://mhlearningacademy.com" target="_blank" class="card-link">Live Link <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="card">
+                <h3>GAMESHOP Store</h3>
+                <p data-en="E-commerce store specializing in game top-ups and digital products." data-bn="গেম টপ-আপ এবং ডিজিটাল পণ্যের ই-কমার্স।">E-commerce store specializing in game top-ups and digital products.</p>
+                <a href="https://gameshopstore.net" target="_blank" class="card-link">Live Link <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="card">
+                <h3>Behance Portfolio</h3>
+                <p data-en="Showcase of creative graphic design, branding, and UI assets." data-bn="গ্রাফিক ডিজাইন এবং ইউআই অ্যাসেট।">Showcase of creative graphic design, branding, and UI assets.</p>
+                <a href="https://behance.com/kazalmahi" target="_blank" class="card-link">View Designs <i class="fas fa-external-link-alt"></i></a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="copyright-bn" style="margin-top: 30px; font-size: 0.8rem; color: #6b7280;">
-        &copy; <span id="year-bn"></span> কাজল মাহি। সর্বস্বত্ব সংরক্ষিত।
-    </div>
+    <section id="faq">
+        <h2 class="sec-title" data-en="Common Questions" data-bn="সাধারণ প্রশ্ন">FAQ</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h4 data-en="Do you provide support after project completion?" data-bn="আপনি কি প্রজেক্টের পরে সাপোর্ট দেন?">Support</h4>
+                <p data-en="Yes, I provide technical support and maintenance after delivery." data-bn="হ্যাঁ, প্রজেক্ট ডেলিভারি করার পর আমি টেকনিক্যাল সাপোর্ট ও রক্ষণাবেক্ষণ সেবা প্রদান করি।">Post-delivery maintenance support.</p>
+            </div>
+            <div class="faq-item">
+                <h4 data-en="How long does it take to build a website?" data-bn="একটি ওয়েবসাইট তৈরি করতে কতদিন সময় লাগে?">Timeline</h4>
+                <p data-en="It depends on complexity, but usually, it takes 5-10 days." data-bn="এটি জটিলতার ওপর নির্ভর করে, তবে সাধারণত ৫-১০ দিন সময় লাগে।">Depends on project requirements.</p>
+            </div>
+        </div>
+    </section>
 
-    <div id="copyright-en" style="margin-top: 30px; font-size: 0.8rem; color: #6b7280; display: none;">
-        &copy; <span id="year-en"></span> Kazal Mahi. All Rights Reserved.
-    </div>
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">KAZAL<span>MAHI</span></div>
+                <p data-en="Bringing ideas to life through elegant code and impactful design."
+                   data-bn="চমৎকার কোডিং এবং ডিজাইনের মাধ্যমে আইডিয়াকে বাস্তবে রূপান্তর করি।">
+                   Bringing ideas to life through elegant code and impactful design.
+                </p>
+                <div class="socials">
+                    <a href="https://behance.com/kazalmahi" target="_blank"><i class="fab fa-behance"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 data-en="Navigation" data-bn="ন্যাভিগেশন">Navigation</h4>
+                <ul>
+                    <li><a href="#services" data-en="Services" data-bn="পরিষেবা">Services</a></li>
+                    <li><a href="#experience" data-en="Journey" data-bn="যাত্রা">Journey</a></li>
+                    <li><a href="#projects" data-en="Work" data-bn="কাজ">Work</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h4 data-en="Contact" data-bn="যোগাযোগ">Contact</h4>
+                <p><i class="fas fa-envelope"></i> kazalmahi.cse@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +8801521119524</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Kazal Mahi. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        document.getElementById('year-bn').textContent = new Date().getFullYear();
-        document.getElementById('year-en').textContent = new Date().getFullYear();
-
-        let currentLang = 'bn';
-        function toggleLang() {
-            const bn = document.getElementById('content-bn');
-            const en = document.getElementById('content-en');
-            const cpBn = document.getElementById('copyright-bn');
-            const cpEn = document.getElementById('copyright-en');
-            const btn = document.querySelector('.lang-switch');
-
-            if (currentLang === 'bn') {
-                bn.style.display = 'none';
-                en.style.display = 'block';
-                cpBn.style.display = 'none';
-                cpEn.style.display = 'block';
-                btn.innerText = 'বাংলা';
-                currentLang = 'en';
-            } else {
-                bn.style.display = 'block';
-                en.style.display = 'none';
-                cpBn.style.display = 'block';
-                cpEn.style.display = 'none';
-                btn.innerText = 'English';
-                currentLang = 'bn';
-            }
-        }
-
-        document.addEventListener('contextmenu', e => e.preventDefault());
-
-        document.onkeydown = function(e) {
-            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73 || e.keyCode === 74)) return false;
-            if (e.keyCode === 123) return false;
+        const btnEn = document.getElementById('btn-en');
+        const btnBn = document.getElementById('btn-bn');
+        const content = (lang) => {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${lang}`);
+            });
         };
-
-        document.querySelectorAll('img').forEach(img => {
-            img.oncontextmenu = () => false;
-            img.ondragstart = () => false;
+        btnEn.addEventListener('click', () => {
+            btnEn.classList.add('active'); btnBn.classList.remove('active');
+            content('en');
         });
+        btnBn.addEventListener('click', () => {
+            btnBn.classList.add('active'); btnEn.classList.remove('active');
+            content('bn');
+        });
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
