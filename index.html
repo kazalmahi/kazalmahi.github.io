@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kazal Mahi | Under Maintenance</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Poppins:wght@300;600&display=swap');
+
+        :root {
+            --primary: #00d2ff;
+            --bg: #111827;
+            --card-bg: #1f2937;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        .lang-switch:hover {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 650px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .profile-frame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), #3a7bd5);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite alternate;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            border: 4px solid var(--bg);
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary); }
+        .status { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #9ca3af; }
+        .bio { font-size: 1.1rem; line-height: 1.6; color: #d1d5db; margin-bottom: 30px; min-height: 60px; }
+
+        .social-links { display: flex; justify-content: center; gap: 15px; }
+        .social-links a {
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <button class="lang-switch" onclick="toggleLang()">English</button>
+
+    <div class="container">
+        <div class="profile-wrapper">
+            <div class="profile-frame">
+                <img src="https://i.postimg.cc/g2x5xKJd/Kazal-Mahi.webp" alt="Kazal Mahi" class="profile-img">
+            </div>
+        </div>
+
+        <div id="content-bn">
+            <p class="status">পোর্টফোলিও মেইনটেন্যান্স চলছে</p>
+            <h1>কাজল মাহি</h1>
+            <p class="bio">আমি একজন ফুল টাইম ওয়েব ডেভেলপার ও পার্ট্টাইম গ্রাফিক ডিজাইনার। নিজের পোর্টফোলিও বানানোর কাজ চলছে… কিন্তু ক্লায়েন্টের প্রজেক্ট শেষ করতে করতে নিজেরটাই pending 😅 খুব শীঘ্রই কিছু নতুন নিয়ে হাজির হচ্ছি!</p>
+        </div>
+
+        <div id="content-en" style="display: none;">
+            <p class="status">Under Maintenance</p>
+            <h1>Kazal Mahi</h1>
+            <p class="bio">I am a Professional Graphic Designer & Web Developer. My personal portfolio is currently under construction. Stay tuned for something amazing!</p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://facebook.com/kazalmahi.i" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/+8801521119524" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://linkedin.com/in/kazalmahi" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:kazalmahi.cse@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <div id="copyright-bn" style="margin-top: 30px; font-size: 0.8rem; color: #6b7280;">
+        &copy; <span id="year-bn"></span> কাজল মাহি। সর্বস্বত্ব সংরক্ষিত।
+    </div>
+
+    <div id="copyright-en" style="margin-top: 30px; font-size: 0.8rem; color: #6b7280; display: none;">
+        &copy; <span id="year-en"></span> Kazal Mahi. All Rights Reserved.
+    </div>
+
+    <script>
+        document.getElementById('year-bn').textContent = new Date().getFullYear();
+        document.getElementById('year-en').textContent = new Date().getFullYear();
+
+        let currentLang = 'bn';
+        function toggleLang() {
+            const bn = document.getElementById('content-bn');
+            const en = document.getElementById('content-en');
+            const cpBn = document.getElementById('copyright-bn');
+            const cpEn = document.getElementById('copyright-en');
+            const btn = document.querySelector('.lang-switch');
+
+            if (currentLang === 'bn') {
+                bn.style.display = 'none';
+                en.style.display = 'block';
+                cpBn.style.display = 'none';
+                cpEn.style.display = 'block';
+                btn.innerText = 'বাংলা';
+                currentLang = 'en';
+            } else {
+                bn.style.display = 'block';
+                en.style.display = 'none';
+                cpBn.style.display = 'block';
+                cpEn.style.display = 'none';
+                btn.innerText = 'English';
+                currentLang = 'bn';
+            }
+        }
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73 || e.keyCode === 74)) return false;
+            if (e.keyCode === 123) return false;
+        };
+
+        document.querySelectorAll('img').forEach(img => {
+            img.oncontextmenu = () => false;
+            img.ondragstart = () => false;
+        });
+    </script>
+</body>
+</html>
