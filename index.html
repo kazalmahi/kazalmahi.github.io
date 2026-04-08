@@ -172,6 +172,13 @@
             .card { padding: 25px; }
             .time-box { padding: 20px 20px; }
         }
+        body {
+    user-select: none;
+    -webkit-user-select: none;
+}
+        img {
+    pointer-events: none;
+}
     </style>
 </head>
 <body>
@@ -383,5 +390,33 @@
         });
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+    <script>
+    // Disable right click
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Disable copy, cut, paste
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('paste', e => e.preventDefault());
+
+    // Disable text selection
+    document.addEventListener('selectstart', e => e.preventDefault());
+
+    // Disable drag
+    document.addEventListener('dragstart', e => e.preventDefault());
+</script>
+    <script>
+    document.onkeydown = function(e) {
+        // Disable F12
+        if (e.keyCode == 123) return false;
+
+        // Disable Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+U
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
+        if (e.ctrlKey && e.keyCode == 85) return false;
+
+        // Disable Ctrl+C / Ctrl+S / Ctrl+X
+        if (e.ctrlKey && (e.keyCode == 67 || e.keyCode == 83 || e.keyCode == 88)) return false;
+    };
+</script>
 </body>
 </html>
