@@ -2,7 +2,7 @@ const video = document.getElementById("video");
 const loader = document.getElementById("loader");
 
 const stream =
-"https://103.151.61.12/T-Sports.kutta/video.m3u8";
+"https://tv-proxy.kazalmahi-gd.workers.dev";
 
 if(Hls.isSupported()){
 
