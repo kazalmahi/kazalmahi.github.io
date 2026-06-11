@@ -2,7 +2,7 @@ const video = document.getElementById("video");
 const loader = document.getElementById("loader");
 
 const stream =
-"http://103.151.61.12/T-Sports.kutta/video.m3u8";
+"https://103.151.61.12/T-Sports.kutta/video.m3u8";
 
 if(Hls.isSupported()){
 
